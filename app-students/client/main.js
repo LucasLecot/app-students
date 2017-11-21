@@ -1,2 +1,2 @@
-import '../imports/ui/alltasks.js';
-import '../imports/api/tasks.js';
+import '../imports/ui/allstudents.js';
+import '../imports/api/students.js';
