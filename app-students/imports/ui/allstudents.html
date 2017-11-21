@@ -1,0 +1,26 @@
+<template name="allstudents">
+
+    <div class="container">
+        <header>
+            <h1>Todo List</h1>
+
+            <form class="new-student">
+                <input type="text" name="text">
+            </form>
+        </header>
+
+        <ul>
+            {{#each students}}
+                {{> student}}
+            {{/each}}
+        </ul>
+    </div>
+
+</template>
+
+<template name="student">
+    <li>{{name}}, {{createdAt}}
+        <input type="text" class="maj" value={{this.name}}>
+        <button>Remove</button>
+    </li>
+</template>
