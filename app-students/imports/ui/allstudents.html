@@ -4,8 +4,19 @@
         <header>
             <h1>Todo List</h1>
 
-            <form class="new-student">
-                <input type="text" name="text">
+            <form class="new-stuff">
+                <label for="name">Name:</label>
+                <input type="text" id="name"  class="text form-control" placeholder="name" required>
+                <br>
+                <label for="firstname">First Name:</label>
+                <input type="text" id="firstname" class="text form-control">
+                <br>
+                <label for="promo">Promo:</label>
+                <input type="text" id="promo" class="text form-control">
+                <br>
+                <label for="abilities">Abilities:</label>
+                <input type="text" id="abilities" class="text form-control">
+                <button class="new-student btn-success btn">Confirm</button>
             </form>
         </header>
 
@@ -19,8 +30,22 @@
 </template>
 
 <template name="student">
-    <li>{{name}}, {{createdAt}}
-        <input type="text" class="maj" value={{this.name}}>
-        <button>Remove</button>
+    <li class="opener"  style="cursor: pointer" >
+        {{name}}, {{firstname}}
+        <button class="btn-danger btn btn_left remove">Remove</button>
+        <button class="btn-info btn btn_left " data-toggle="collapse" data-target="#{{ this._id }}">More</button>
+
     </li>
+    <div class="collapse" id="{{ this._id }}">
+        <div class="well">
+            Name
+            <input type="text" class="maj input-group form-control" id="name" value={{this.name}}> <br>
+            First Name
+            <input type="text" class="maj input-group form-control" id="firstname" value={{this.firstname}}> <br>
+            Promo
+            <input type="text" class="maj input-group form-control" id="promo" value={{this.promo}}> <br>
+            Ailities
+            <input type="text" class="maj input-group form-control" id="abilities" value={{this.abilities}}>
+        </div>
+    </div>
 </template>

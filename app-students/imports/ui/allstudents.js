@@ -10,32 +10,58 @@ Template.allstudents.helpers({
     },
 });
 
+
+
 Template.allstudents.events
 (
     {
-        'submit .new-student'(event) {
+        'submit .new-stuff'(event, template) {
             // Prevent default browser form submit
             event.preventDefault();
 
-            // Get value from form element
-            const target = event.target;
-            const name = target.text.value;
+
+
+            // Get value from the elements
+            const name =  template.find("#name").value;
+            const firstname = template.find("#firstname").value;
+            const promo = template.find("#promo").value;
+            const abilities = template.find("#abilities").value;
+
+
+            // Select all the inputs
+            var inputs =  template.findAll(".text");
 
             // Insert a student into the collection
-            Students.insert({
-                name,
-                createdAt: new Date(), // current time
-            });
+            if (Students.name === ""){
+                console.log("Erreur")
+            }else {
+                Students.insert({
+                    name,
+                    firstname,
+                    promo,
+                    abilities
+                });
 
-            // Clear form
-            target.text.value = '';
+            }
+
+            //Get All inputs, to reset then on submit
+            for (let i = 0 ; inputs.length > i ; i++){
+                inputs[i].value= "";
+            }
         },
-        'click button'(event) {
+
+        // Button used to remove the element
+        'click .remove'(event) {
             Students.remove(this._id);
         },
 
         'change .maj'(event) {
+            console.log(  this ,this._id,  event );
 
-            Students.update(this._id, { $set: { name: event.target.value } });
+            var o = {}; // Création d'un objet vide
+            o[ event.target.id ] = event.currentTarget.value ; // On insère un attribut dinamique
+            Students.update(this._id, { $set: o });
         }
+
     });
+
